@@ -1,0 +1,62 @@
+# {{ ansible_managed }}
+# Kafka Server Properties (KRaft mode)
+
+# The role of this node in the cluster: broker, controller, or broker,controller
+# For a 3-node cluster, all nodes should be both brokers and controllers
+process.roles=broker,controller
+
+# The unique ID of this broker
+node.id={{ node_id }}
+
+# The directory where the log directories are placed
+log.dirs={{ kafka_data_dir }}
+
+# A comma-separated list of the PLAINTEXT addresses the broker should listen on.
+listeners=PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+
+# Maps listener names to security protocols
+listener.security.protocol.map=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+
+# The broker will advertise this address to clients
+advertised.listeners=PLAINTEXT://{{ ansible_host }}:9092
+
+# The inter.broker.listener.name must contain only the listener used by replicating brokers
+inter.broker.listener.name=PLAINTEXT
+
+# The listeners that the controller should use
+controller.listener.names=CONTROLLER
+
+# A list of all voters in the cluster for the controller quorum.
+# Format: <node.id>@<host>:<port>
+controller.quorum.voters={% for host in groups['all'] %}{{ hostvars[host]['node_id'] }}@{{ hostvars[host]['ansible_host'] }}:9093{% if not loop.last %},{% endif %}{% endfor %}
+
+# The replication factor for the metadata topic
+default.replication.factor=3
+
+# The minimum number of in-sync replicas required for the controller to accept writes
+min.insync.replicas=2
+
+# The number of partitions for the offsets topic
+offsets.topic.replication.factor=3
+
+# The number of partitions for the transaction topic
+transaction.state.log.replication.factor=3
+transaction.state.log.min.isr=2
+
+# Enable auto creation of topics on the server
+auto.create.topics.enable=true
+
+# Socket server settings
+num.network.threads=3
+num.io.threads=8
+socket.send.buffer.bytes=102400
+socket.receive.buffer.bytes=102400
+socket.request.max.bytes=104857600
+
+# Log configuration
+num.partitions=3
+num.recovery.threads.per.data.dir=1
+log.retention.hours=168
+log.segment.bytes=1073741824
+log.retention.check.interval.ms=300000
+log.cleaner.enable=true

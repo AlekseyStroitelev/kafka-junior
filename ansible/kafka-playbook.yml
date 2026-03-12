@@ -1,0 +1,182 @@
+---
+- name: Настройка кластера Kafka (KRaft mode)
+  hosts: all
+  become: true
+  vars:
+    kafka_version: "4.2.0"
+    kafka_scala_version: "2.13"
+    kafka_tarball: "kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tgz"
+    kafka_download_url: "https://downloads.apache.org/kafka/{{ kafka_version }}/{{ kafka_tarball }}"
+    kafka_install_dir: "/opt/kafka"
+    kafka_data_dir: "/var/lib/kafka/data"
+
+  tasks:
+    - name: Установка Java
+      ansible.builtin.apt:
+        name: openjdk-17-jdk-headless
+        state: present
+        update_cache: true
+
+    - name: Установка acl для корректной работы become с непривилегированными пользователями
+      ansible.builtin.apt:
+        name: acl
+        state: present
+        update_cache: true
+      become: true
+
+    - name: Создание группы kafka
+      ansible.builtin.group:
+        name: kafka
+        system: true
+
+    - name: Создание пользователя kafka
+      ansible.builtin.user:
+        name: kafka
+        group: kafka
+        home: "{{ kafka_install_dir }}"
+        system: true
+        shell: /bin/false
+
+    - name: Скачивание Kafka
+      ansible.builtin.get_url:
+        url: "{{ kafka_download_url }}"
+        dest: "/tmp/{{ kafka_tarball }}"
+        mode: '0644'
+        timeout: 30
+
+    - name: Создание директории установки
+      ansible.builtin.file:
+        path: "{{ kafka_install_dir }}"
+        state: directory
+        owner: kafka
+        group: kafka
+        mode: '0755'
+
+    - name: Распаковка Kafka
+      ansible.builtin.unarchive:
+        src: "/tmp/{{ kafka_tarball }}"
+        dest: "{{ kafka_install_dir }}"
+        remote_src: true
+        extra_opts: [--strip-components=1]
+        owner: kafka
+        group: kafka
+      register: unarchive_result
+
+    - name: Убеждаемся, что директория config/kraft существует
+      ansible.builtin.file:
+        path: "{{ kafka_install_dir }}/config/kraft"
+        state: directory
+        owner: kafka
+        group: kafka
+        mode: '0755'
+
+    - name: Создание директории для данных
+      ansible.builtin.file:
+        path: "{{ kafka_data_dir }}"
+        state: directory
+        owner: kafka
+        group: kafka
+        mode: '0755'
+
+    # Создание временной директории для Ansible с правильными правами
+    - name: Создание .ansible/tmp с правильными правами
+      ansible.builtin.file:
+        path: "{{ kafka_install_dir }}/.ansible/tmp"
+        state: directory
+        owner: kafka
+        group: kafka
+        mode: '0755'
+      become: true
+
+    # Устанавливаем node.id для текущего хоста
+    - name: Установка node.id для каждой машины
+      ansible.builtin.set_fact:
+        node_id: "{{ groups['all'].index(inventory_hostname) + 1 }}"
+
+    # Генерация cluster_id на первом узле (без run_once)
+    - name: Генерация cluster_id на первом узле
+      ansible.builtin.set_fact:
+        cluster_id_value: "{{ (groups['all'][0] + '_kafka_cluster') | to_uuid | replace('-', '') }}"
+      when: inventory_hostname == groups['all'][0]
+
+    # Обновление инвентаря, чтобы факты стали доступны на всех хостах
+    - name: Обновление фактов инвентаря
+      ansible.builtin.meta: refresh_inventory
+
+    # Получение cluster_id с первого узла для остальных
+    - name: Получение cluster_id с первого узла
+      ansible.builtin.set_fact:
+        cluster_id_value: "{{ hostvars[groups['all'][0]]['cluster_id_value'] }}"
+      when: inventory_hostname != groups['all'][0]
+
+    # Проверка, что cluster_id определен на всех узлах
+    - name: Проверка наличия cluster_id
+      ansible.builtin.assert:
+        that:
+          - cluster_id_value is defined
+          - cluster_id_value | length > 0
+        fail_msg: "cluster_id не определен на {{ inventory_hostname }}"
+        success_msg: "cluster_id={{ cluster_id_value }} на {{ inventory_hostname }}"
+
+    # Настройка server.properties из шаблона
+    - name: Настройка server.properties из шаблона
+      ansible.builtin.template:
+        src: server.properties.j2
+        dest: "{{ kafka_install_dir }}/config/kraft/server.properties"
+        owner: kafka
+        group: kafka
+        mode: '0644'
+
+    # Проверка существования директории метаданных
+    - name: Проверка существования директории метаданных
+      ansible.builtin.stat:
+        path: "{{ kafka_data_dir }}/__cluster_metadata-0"
+      register: metadata_dir_check
+      become: true
+      become_user: root
+
+    # Форматирование журнала метаданных
+    - name: Форматирование журнала метаданных (только если не отформатировано)
+      become_user: kafka
+      ansible.builtin.shell: |
+        {{ kafka_install_dir }}/bin/kafka-storage.sh format \
+          -t {{ cluster_id_value }} \
+          -c {{ kafka_install_dir }}/config/kraft/server.properties \
+          --ignore-formatted
+      register: format_result
+      when: not metadata_dir_check.stat.exists
+      changed_when: "'Formatting' in format_result.stdout"
+      environment:
+        KAFKA_OPTS: ""
+
+    # Создание systemd unit файла для Kafka
+    - name: Создание systemd unit файла для Kafka
+      ansible.builtin.template:
+        src: kafka.service.j2
+        dest: /etc/systemd/system/kafka.service
+        owner: root
+        group: root
+        mode: '0644'
+      vars:
+        kafka_home: "{{ kafka_install_dir }}"
+        kafka_user: kafka
+        kafka_group: kafka
+      notify: Restart kafka
+
+    # Перезагрузка systemd
+    - name: Перезагрузка systemd
+      ansible.builtin.systemd:
+        daemon_reload: true
+
+    # Запуск и включение Kafka
+    - name: Запуск и включение Kafka
+      ansible.builtin.systemd:
+        name: kafka
+        state: started
+        enabled: true
+
+  handlers:
+    - name: Restart kafka
+      ansible.builtin.systemd:
+        name: kafka
+        state: restarted
