@@ -53,32 +53,19 @@ Topic: test-topic	PartitionCount: 3	ReplicationFactor: 3	Configs:
 
 `/opt/kafka/bin/kafka-metadata-quorum.sh --bootstrap-server localhost:9092 describe --status`
 
-
-
 5. Тест отправки и чтения сообщений
 Отправка сообщения:
 
-bash
-echo "Hello Kafka" | /opt/kafka/bin/kafka-console-producer.sh \
-  --topic test-topic \
-  --bootstrap-server localhost:9092
+`echo "Hello Kafka" | /opt/kafka/bin/kafka-console-producer.sh --topic test-topic --bootstrap-server localhost:9092`
+
 Чтение сообщения:
 
-bash
-/opt/kafka/bin/kafka-console-consumer.sh \
-  --topic test-topic \
-  --bootstrap-server localhost:9092 \
-  --from-beginning \
-  --max-messages 1
-Должны увидеть: Hello Kafka
+`/opt/kafka/bin/kafka-console-consumer.sh --topic test-topic --bootstrap-server localhost:9092 --from-beginning --max-messages 1`
 
-Полезные команды для мониторинга
-Список всех топиков
-bash
-/opt/kafka/bin/kafka-topics.sh --list --bootstrap-server localhost:9092
-Информация о брокерах
-bash
-/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 | head -20
-Логи Kafka
-bash
-sudo tail -f /opt/kafka/logs/server.log
+**Должны увидеть: Hello Kafka**
+
+---
+
+<p align="center">
+  <img src="https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/ansible_logo.png"/>
+</p>
