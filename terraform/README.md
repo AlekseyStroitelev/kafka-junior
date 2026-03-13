@@ -1,5 +1,4 @@
 # Terraform
----
 
 1. Изменить значения `cloud_id` и `folder_id` в `variables.tf` на соответствующие в вашем `yandex cloud`.
 
