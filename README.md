@@ -2,7 +2,7 @@
 
 ---
 
-1. Развернуть инфраструктуру в YC по средствам [Terraform](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/terraform/README.md)
+1. Развертывание инфраструктуры в YC по средствам [Terraform](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/terraform/README.md)
 
 2. Развертывание кластера kafka с предварительной настройкой в KRaft Mode с помощью [Ansible](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/ansible/README.md)
 
