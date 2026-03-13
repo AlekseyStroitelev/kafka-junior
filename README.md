@@ -5,5 +5,5 @@
 
 2. Развертывание кластера kafka с предварительной настройкой в KRaft Mode с помощью [Ansible](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/ansible/README.md)
 
-![1_1](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/terraform_logo.png) ![1_2](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/kafka_logo.png)</br>
-![1_3](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/yc_logo.png) ![1_4](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/ansible_logo.png)
+![1_1](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/terraform_logo.png) ![1_4](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/ansible_logo.png)</br>
+![1_3](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/yc_logo.png) ![1_2](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/kafka_logo.png)
