@@ -1,1 +1,6 @@
-#Kafka-junior
+# Kafka-junior
+---
+
+1. Развернуть инфраструктуру в YC по средствам Terraform
+
+2. Развертывание кластера kafka с предварительной настройкой в KRaft Mode с помощью Ansible
