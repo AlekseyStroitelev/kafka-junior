@@ -53,7 +53,7 @@ Topic: test-topic	PartitionCount: 3	ReplicationFactor: 3	Configs:
 
 `/opt/kafka/bin/kafka-metadata-quorum.sh --bootstrap-server localhost:9092 describe --status`
 
-5. Тест отправки и чтения сообщений
+5. Тест отправки и чтения сообщений 
 Отправка сообщения:
 
 `echo "Hello Kafka" | /opt/kafka/bin/kafka-console-producer.sh --topic test-topic --bootstrap-server localhost:9092`
