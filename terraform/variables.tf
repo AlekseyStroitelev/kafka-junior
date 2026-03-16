@@ -17,7 +17,7 @@ variable "vpc_name" {
   description = "VPC network & subnet name"
 }
 
-#Instances
+#Instances kafka
 variable "vms_resources" {
   type = map(object({
     core     = number
@@ -28,6 +28,24 @@ variable "vms_resources" {
   default = {
     kafka = {
       count    = 3
+      core     = 2
+      memory   = 4
+      fraction = 20
+    }
+  }
+}
+
+#Instances akhq
+variable "vms_resources" {
+  type = map(object({
+    core     = number
+    memory   = number
+    fraction = number
+    count    = number
+  }))
+  default = {
+    akhq = {
+      count    = 1
       core     = 2
       memory   = 4
       fraction = 20
