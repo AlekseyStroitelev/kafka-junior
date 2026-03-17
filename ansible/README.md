@@ -68,7 +68,10 @@ Topic: test-topic	PartitionCount: 3	ReplicationFactor: 3	Configs:
 
 # AKHQ
 
-Развернем <a name="akhq-server"></a>
+С помощью `Ansible` развернем и настроим AKHQ для удобства работы с `Kafka`. Отдельный сервер для этого был развернут на шаге `1` когда мы готовили инфраструктуру с помощью `Terraform`
+
+1. Из директории *ansible*: `ansible-playbook -i inventory.yml akhq-playbook.yml -v`
+2. После того, как playbook отработал, UI AKHQ будет доступен по адресу http://<you_IP>:8080
 
 ---
 
