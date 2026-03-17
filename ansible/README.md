@@ -68,7 +68,7 @@ Topic: test-topic	PartitionCount: 3	ReplicationFactor: 3	Configs:
 
 # AKHQ
 
-Развернем [akhq-server](ansible/README.md#akhq-server)
+Развернем [AKHQ](#akhq-server)
 
 ---
 
