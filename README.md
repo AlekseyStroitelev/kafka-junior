@@ -11,8 +11,8 @@
 ---
 
 <p align="center">
-  <img src="https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/terraform_logo.png"/>
-  <img src="https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/ansible_logo.png"/>
-  <img src="https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/yc_logo.png"/>
-  <img src="https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/kafka_logo.png"/>
+  <img src="pictures/terraform_logo.png"/>
+  <img src="pictures/ansible_logo.png"/>
+  <img src="pictures/yc_logo.png"/>
+  <img src="pictures/kafka_logo.png"/>
 </p>

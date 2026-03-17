@@ -10,10 +10,10 @@
 
 5. После создания инфраструктуры необходимо запустить скрипт `gen_inventory.sh` для генерации файла `inventory.yml` который будет создан в каталоге `ansible`.
 
-6. После генерации инвентаря можно переходить к следующему этапу по развертыванию и настройке кластера с помощью [Ansible](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/ansible/README.md)
+6. После генерации инвентаря можно переходить к следующему этапу по развертыванию и настройке кластера с помощью [Ansible](ansible/README.md)
 
 ---
 
 <p align="center">
-  <img src="https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/terraform_logo.png"/>
+  <img src="pictures/terraform_logo.png"/>
 </p>

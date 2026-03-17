@@ -4,20 +4,20 @@
 
 1. GO:
 
-![producer](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/producer_go.png)
-![consumer](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/consumer_go.png)
-![akhq](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/akhq_go.png)
+![producer](pictures/producer_go.png)
+![consumer](pictures/consumer_go.png)
+![akhq](pictures/akhq_go.png)
 
 ---
 
 2. Python:
 
-![producer](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/producer_python.png)
-![consumer](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/consumer_python.png)
-![akhq](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/akhq_python.png)
+![producer](pictures/producer_python.png)
+![consumer](pictures/consumer_python.png)
+![akhq](pictures/akhq_python.png)
 
 ---
 
 <p align="center">
-  <img src="https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/kafka_logo.png"/>
+  <img src="pictures/kafka_logo.png"/>
 </p>
