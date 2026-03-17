@@ -76,5 +76,5 @@ Topic: test-topic	PartitionCount: 3	ReplicationFactor: 3	Configs:
 ---
 
 <p align="center">
-  <img src="pictures/ansible_logo.png"/>
+  <img src="../pictures/ansible_logo.png"/>
 </p>

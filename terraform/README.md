@@ -15,5 +15,5 @@
 ---
 
 <p align="center">
-  <img src="pictures/terraform_logo.png"/>
+  <img src="../pictures/terraform_logo.png"/>
 </p>

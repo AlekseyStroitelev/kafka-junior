@@ -4,20 +4,20 @@
 
 1. GO:
 
-![producer](pictures/producer_go.png)
-![consumer](pictures/consumer_go.png)
-![akhq](pictures/akhq_go.png)
+![producer](../pictures/producer_go.png)
+![consumer](../pictures/consumer_go.png)
+![akhq](../pictures/akhq_go.png)
 
 ---
 
 2. Python:
 
-![producer](pictures/producer_python.png)
-![consumer](pictures/consumer_python.png)
-![akhq](pictures/akhq_python.png)
+![producer](../pictures/producer_python.png)
+![consumer](../pictures/consumer_python.png)
+![akhq](../pictures/akhq_python.png)
 
 ---
 
 <p align="center">
-  <img src="pictures/kafka_logo.png"/>
+  <img src="../pictures/kafka_logo.png"/>
 </p>
