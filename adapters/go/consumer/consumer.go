@@ -149,7 +149,7 @@ func main() {
 
 
 type User struct {
- Name           `string json:"name"`
- FavoriteNumber `int64  json:"favorite_number"`
- FavoriteColor  `string json:"favorite_color"`
+ Name           string `json:"name"`
+ FavoriteNumber int64  `json:"favorite_number"`
+ FavoriteColor  string `json:"favorite_color"`
 }
