@@ -78,7 +78,7 @@ def delivery_report(err, msg):
 
 def main():
     print('Start Producer')
-    topic = "<topic>"
+    topic = "testTopic_Python"
 
     schema = "user_specific.avsc"
 
@@ -87,7 +87,7 @@ def main():
     with open(f"{path}/avro/{schema}") as f:
         schema_str = f.read()
 
-    schema_conf = {'url':'http://<ip>:8081/'}
+    schema_conf = {'url':'http://localhost:8081/'}
     schema_registry_client = SchemaRegistryClient(schema_conf)
 
     avro_serializer = AvroSerializer(schema_registry_client,
@@ -97,7 +97,7 @@ def main():
     string_serializer = StringSerializer('utf_8')
 
     # Оставлен только адрес брокера, настройки SSL и Kerberos удалены
-    producer_conf = {'bootstrap.servers': "<ip>:9092"}
+    producer_conf = {'bootstrap.servers': "89.169.148.201:9092"}
 
     producer = Producer(producer_conf)
 

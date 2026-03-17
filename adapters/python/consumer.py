@@ -43,7 +43,7 @@ def main():
     print('Start Consumer')
     
     # Указываем топик, из которого будем читать сообщения
-    topic = "<topic>"
+    topic = "testTopic_Python"
 
     # Имя файла со схемой Avro
     schema = "user_specific.avsc"
@@ -57,7 +57,7 @@ def main():
         schema_str = f.read()
 
     # Настройка клиента Schema Registry (адрес сервера со схемами)
-    schema_conf = {'url': 'http://<ip>:8081/'}
+    schema_conf = {'url': 'http://localhost:8081/'}
     schema_registry_client = SchemaRegistryClient(schema_conf)
 
     # Создаем объект десериализатора Avro.
@@ -69,7 +69,7 @@ def main():
     # Оставлены только базовые и необходимые параметры настройки.
     consumer_conf = {
         'group.id': 'my-consumer-group',
-        'bootstrap.servers': '<ip>:9092', # Адрес брокера Kafka
+        'bootstrap.servers': '89.169.148.201:9092', # Адрес брокера Kafka
         'session.timeout.ms': 10000,                            # Таймаут сессии (10 секунд)
         'auto.offset.reset': 'earliest'                         # Если нет сохраненного оффсета, начинать чтение с самого начала
     }
