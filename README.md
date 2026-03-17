@@ -1,12 +1,12 @@
 # Kafka-junior
 
-1. Развертывание инфраструктуры в YC по средствам [Terraform](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/terraform/README.md)
+1. Развертывание инфраструктуры в YC по средствам [Terraform](terraform/README.md)
 
-2. Развертывание кластера kafka с предварительной настройкой в KRaft Mode с помощью [Ansible](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/ansible/README.md)
+2. Развертывание кластера kafka с предварительной настройкой в KRaft Mode с помощью [Ansible](ansible/README.md)
 
 3. Развертываение [akhq-server](ansible/README.md#akhq)
 
-4. Примеры работы адаптеров на [GO/Python](https://github.com/AlekseyStroitelev/kafka-junior/tree/main/adapters/README.md)
+4. Примеры работы адаптеров на [GO/Python](/adapters/README.md)
 
 ---
 
