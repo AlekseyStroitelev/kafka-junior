@@ -6,6 +6,8 @@
 
 3. Развертываение [akhq-server](ansible/README.md#akhq)
 
+4. Примеры работы адаптеров на [GO/Python](https://github.com/AlekseyStroitelev/kafka-junior/tree/main/adapters/README.md)
+
 ---
 
 <p align="center">
