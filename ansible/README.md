@@ -66,6 +66,11 @@ Topic: test-topic	PartitionCount: 3	ReplicationFactor: 3	Configs:
 
 ---
 
+# AKHQ
+
+Развернем <a id="akhq-server"></a>
+
+
 <p align="center">
   <img src="https://github.com/AlekseyStroitelev/kafka-junior/blob/main/pictures/ansible_logo.png"/>
 </p>

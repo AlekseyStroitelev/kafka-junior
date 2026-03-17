@@ -1,12 +1,12 @@
 #Kafka servers
 resource "yandex_compute_instance" "kafka" {
-  count    = var.vms_resources.kafka.count
+  count    = var.kafka_resources.kafka.count
   name     = "kafka-server-${count.index + 1}"
   hostname = "kafka-server-${count.index + 1}"
   resources {
-    cores         = var.vms_resources.kafka.core
-    memory        = var.vms_resources.kafka.memory
-    core_fraction = var.vms_resources.kafka.fraction
+    cores         = var.kafka_resources.kafka.core
+    memory        = var.kafka_resources.kafka.memory
+    core_fraction = var.kafka_resources.kafka.fraction
   }
   boot_disk {
     initialize_params {

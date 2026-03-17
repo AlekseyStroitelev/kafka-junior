@@ -1,11 +1,22 @@
 all:
   hosts:
     kafka-server-1:
-      ansible_host: 93.77.178.78
+      ansible_host: 89.169.148.201
+      node_id: 1
     kafka-server-2:
-      ansible_host: 62.84.117.39
+      ansible_host: 93.77.188.44
+      node_id: 2
     kafka-server-3:
-      ansible_host: 93.77.191.9
-  vars:
-    ansible_ssh_private_key_file: ~/.ssh/id_rsa
-    ansible_user: ubuntu
+      ansible_host: 89.169.148.233
+      node_id: 3
+    akhq-server:
+      ansible_host: 93.77.181.236
+  children:
+    kafka_brokers:
+      hosts:
+        kafka-server-1: {}
+        kafka-server-2: {}
+        kafka-server-3: {}
+    monitoring:
+      hosts:
+        akhq-server: {}

@@ -18,7 +18,7 @@ variable "vpc_name" {
 }
 
 #Instances kafka
-variable "vms_resources" {
+variable "kafka_resources" {
   type = map(object({
     core     = number
     memory   = number
@@ -36,7 +36,7 @@ variable "vms_resources" {
 }
 
 #Instances akhq
-variable "vms_resources" {
+variable "akhq_resources" {
   type = map(object({
     core     = number
     memory   = number

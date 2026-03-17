@@ -28,7 +28,7 @@ controller.listener.names=CONTROLLER
 
 # A list of all voters in the cluster for the controller quorum.
 # Format: <node.id>@<host>:<port>
-controller.quorum.voters={% for host in groups['all'] %}{{ hostvars[host]['node_id'] }}@{{ hostvars[host]['ansible_host'] }}:9093{% if not loop.last %},{% endif %}{% endfor %}
+controller.quorum.voters={% for host in groups['kafka_brokers'] %}{{ hostvars[host]['node_id'] }}@{{ hostvars[host]['ansible_host'] }}:9093{% if not loop.last %},{% endif %}{% endfor %}
 
 # The replication factor for the metadata topic
 default.replication.factor=3

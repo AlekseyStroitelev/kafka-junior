@@ -1,12 +1,12 @@
 #AKHQ server
 resource "yandex_compute_instance" "akhq" {
-  count    = var.vms_resources.akhq.count
+  count    = var.akhq_resources.akhq.count
   name     = "akhq-server-${count.index + 1}"
   hostname = "akhq-server-${count.index + 1}"
   resources {
-    cores         = var.vms_resources.akhq.core
-    memory        = var.vms_resources.akhq.memory
-    core_fraction = var.vms_resources.akhq.fraction
+    cores         = var.akhq_resources.akhq.core
+    memory        = var.akhq_resources.akhq.memory
+    core_fraction = var.akhq_resources.akhq.fraction
   }
   boot_disk {
     initialize_params {
@@ -26,6 +26,7 @@ resource "yandex_compute_instance" "akhq" {
   }
 
   labels = {
-    role = "akhq-server"
+    role    = "akhq-server"
+    service = "kafka-ui"
   }
 }

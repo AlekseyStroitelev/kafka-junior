@@ -4,6 +4,8 @@
 
 2. Развертывание кластера kafka с предварительной настройкой в KRaft Mode с помощью [Ansible](https://github.com/AlekseyStroitelev/kafka-junior/blob/main/ansible/README.md)
 
+3. Развертываение [AKHQ](#akhq-server)
+
 ---
 
 <p align="center">

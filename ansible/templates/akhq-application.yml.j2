@@ -1,0 +1,41 @@
+# {{ ansible_managed }}
+micronaut:
+  server:
+    port: 8080
+  security:
+    enabled: false
+
+akhq:
+  connections:
+    kafka-cluster:
+      properties:
+        bootstrap.servers: "{% for host in groups['kafka_brokers'] %}{{ hostvars[host]['ansible_host'] }}:9092{% if not loop.last %},{% endif %}{% endfor %}"
+        client.id: akhq-consumer
+        connections.max.idle.ms: 180000
+        request.timeout.ms: 30000
+        session.timeout.ms: 30000
+      
+      ui-options:
+        topic:
+          default-view: ALL
+          show-all-actions: true
+          refresh-interval: 5000
+        consumer-groups:
+          show-all-groups: true
+          refresh-interval: 5000
+        nodes:
+          show-all-nodes: true
+          refresh-interval: 30000
+
+  # Базовая аутентификация (закомментировано, не активно)
+  # security:
+  #   basic-auth:
+  #     - username: admin
+  #       password: {{ akhq_admin_password }}
+  #       roles: [admin]
+  
+  # CORS настройки
+  cors:
+    enabled: false
+    origins: "*"
+    methods: "GET,POST,PUT,DELETE"

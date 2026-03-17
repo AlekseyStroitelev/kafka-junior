@@ -1,6 +1,6 @@
 ---
 - name: Настройка кластера Kafka (KRaft mode)
-  hosts: all
+  hosts: kafka_brokers
   become: true
   vars:
     kafka_version: "4.2.0"
@@ -91,13 +91,13 @@
     # Устанавливаем node.id для текущего хоста
     - name: Установка node.id для каждой машины
       ansible.builtin.set_fact:
-        node_id: "{{ groups['all'].index(inventory_hostname) + 1 }}"
+        node_id: "{{ groups['kafka_brokers'].index(inventory_hostname) + 1 }}"
 
     # Генерация cluster_id на первом узле (без run_once)
     - name: Генерация cluster_id на первом узле
       ansible.builtin.set_fact:
-        cluster_id_value: "{{ (groups['all'][0] + '_kafka_cluster') | to_uuid | replace('-', '') }}"
-      when: inventory_hostname == groups['all'][0]
+        cluster_id_value: "{{ (groups['kafka_brokers'][0] + '_kafka_cluster') | to_uuid | replace('-', '') }}"
+      when: inventory_hostname == groups['kafka_brokers'][0]
 
     # Обновление инвентаря, чтобы факты стали доступны на всех хостах
     - name: Обновление фактов инвентаря
@@ -106,8 +106,8 @@
     # Получение cluster_id с первого узла для остальных
     - name: Получение cluster_id с первого узла
       ansible.builtin.set_fact:
-        cluster_id_value: "{{ hostvars[groups['all'][0]]['cluster_id_value'] }}"
-      when: inventory_hostname != groups['all'][0]
+        cluster_id_value: "{{ hostvars[groups['kafka_brokers'][0]]['cluster_id_value'] }}"
+      when: inventory_hostname != groups['kafka_brokers'][0]
 
     # Проверка, что cluster_id определен на всех узлах
     - name: Проверка наличия cluster_id

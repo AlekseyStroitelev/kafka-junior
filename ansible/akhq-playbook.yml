@@ -1,0 +1,80 @@
+---
+- name: Установка AKHQ для мониторинга Kafka
+  hosts: monitoring  # Группа хостов для AKHQ
+  become: true
+  vars:
+    akhq_version: "0.26.0"
+    akhq_install_dir: "/opt/akhq"
+    akhq_config_dir: "/etc/akhq"
+    akhq_user: "akhq"
+    java_version: "openjdk-17-jre-headless"
+    akhq_admin_password: "iddqd"
+
+  tasks:
+    - name: Установка Java
+      ansible.builtin.apt:
+        name: "{{ java_version }}"
+        state: present
+        update_cache: true
+
+    - name: Создание пользователя akhq
+      ansible.builtin.user:
+        name: "{{ akhq_user }}"
+        system: true
+        shell: /bin/false
+        home: "{{ akhq_install_dir }}"
+        create_home: false
+
+    - name: Создание директорий
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ akhq_user }}"
+        group: "{{ akhq_user }}"
+        mode: '0755'
+      loop:
+        - "{{ akhq_install_dir }}"
+        - "{{ akhq_config_dir }}"
+
+    - name: Скачивание AKHQ
+      ansible.builtin.get_url:
+        url: "https://github.com/tchiotludo/akhq/releases/download/{{ akhq_version }}/akhq-{{ akhq_version }}-all.jar"
+        dest: "{{ akhq_install_dir }}/akhq.jar"
+        owner: "{{ akhq_user }}"
+        group: "{{ akhq_user }}"
+        mode: '0644'
+        timeout: 60
+      register: akhq_download
+
+    - name: Копирование конфигурации AKHQ
+      ansible.builtin.template:
+        src: akhq-application.yml.j2
+        dest: "{{ akhq_config_dir }}/application.yml"
+        owner: "{{ akhq_user }}"
+        group: "{{ akhq_user }}"
+        mode: '0644'
+
+    - name: Создание systemd service для AKHQ
+      ansible.builtin.template:
+        src: akhq.service.j2
+        dest: /etc/systemd/system/akhq.service
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Запуск и включение AKHQ
+      ansible.builtin.systemd:
+        name: akhq
+        state: started
+        enabled: true
+        daemon_reload: true
+
+    - name: Проверка доступности AKHQ
+      ansible.builtin.uri:
+        url: "http://localhost:8080"
+        method: GET
+        status_code: 200
+      register: akhq_health
+      retries: 10
+      delay: 5
+      until: akhq_health.status == 200

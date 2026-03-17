@@ -1,0 +1,22 @@
+# {{ ansible_managed }}
+[Unit]
+Description=AKHQ Kafka Web UI
+After=network.target
+
+[Service]
+Type=simple
+User={{ akhq_user }}
+Group={{ akhq_user }}
+WorkingDirectory={{ akhq_install_dir }}
+Environment="MICRONAUT_CONFIG_FILES={{ akhq_config_dir }}/application.yml"
+ExecStart=/usr/bin/java \
+  -Xmx2G \
+  -Xms512M \
+  -XX:+UseG1GC \
+  -jar {{ akhq_install_dir }}/akhq.jar
+Restart=on-failure
+RestartSec=10
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
