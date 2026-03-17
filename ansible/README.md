@@ -68,7 +68,7 @@ Topic: test-topic	PartitionCount: 3	ReplicationFactor: 3	Configs:
 
 # AKHQ
 
-Развернем [AKHQ](#akhq-server)
+Развернем <a name="akhq-server"></a>
 
 ---
 
