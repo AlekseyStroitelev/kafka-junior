@@ -1,0 +1,10 @@
+/home/makaron/kafka/kafka-junior/adapters/java/src/main/java/org/example/ProducerExample.java
+/home/makaron/kafka/kafka-junior/adapters/java/src/main/java/org/example/TestTemperatureConsumer.java
+/home/makaron/kafka/kafka-junior/adapters/java/src/main/java/org/example/TestConsumerForWordCountDemo.java
+/home/makaron/kafka/kafka-junior/adapters/java/src/main/java/org/example/CustomAvroDeserializer.java
+/home/makaron/kafka/kafka-junior/adapters/java/src/main/java/org/example/PipeExample.java
+/home/makaron/kafka/kafka-junior/adapters/java/src/main/java/org/example/WordCountDemo.java
+/home/makaron/kafka/kafka-junior/adapters/java/src/main/java/org/example/ConsumerExample.java
+/home/makaron/kafka/kafka-junior/adapters/java/src/main/java/org/example/TemperatureDemo.java
+/home/makaron/kafka/kafka-junior/adapters/java/src/main/java/org/example/TestProducerForWordCountDemo.java
+/home/makaron/kafka/kafka-junior/adapters/java/src/main/java/org/example/TestTemperatureProducer.java

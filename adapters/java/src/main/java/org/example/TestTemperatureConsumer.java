@@ -17,7 +17,7 @@ public class TestTemperatureConsumer {
     public static void main(String[] args) {
         // Настройки консьюмера
         Properties props = new Properties();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "<ip>:9092");
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "158.160.41.251:9092");
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "temperature-max-reader");
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 

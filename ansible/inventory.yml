@@ -1,16 +1,16 @@
 all:
   hosts:
     kafka-server-1:
-      ansible_host: 89.169.148.201
+      ansible_host: 158.160.41.251
       node_id: 1
     kafka-server-2:
-      ansible_host: 93.77.188.44
+      ansible_host: 158.160.50.84
       node_id: 2
     kafka-server-3:
-      ansible_host: 89.169.148.233
+      ansible_host: 158.160.49.225
       node_id: 3
     akhq-server:
-      ansible_host: 93.77.181.236
+      ansible_host: 93.77.186.124
   children:
     kafka_brokers:
       hosts:

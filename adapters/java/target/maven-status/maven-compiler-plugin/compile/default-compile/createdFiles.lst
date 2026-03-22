@@ -1,0 +1,13 @@
+org/example/ProducerExample.class
+TestTemperatureConsumer.class
+org/example/WordCountDemo.class
+org/example/CustomAvroDeserializer.class
+org/example/ConsumerExample.class
+org/example/TemperatureDemo.class
+org/example/PipeExample$1.class
+org/example/TemperatureDemo$1.class
+org/example/PipeExample.class
+org/example/WordCountDemo$1.class
+org/example/TestConsumerForWordCountDemo.class
+org/example/TestTemperatureProducer.class
+org/example/TestProducerForWordCountDemo.class

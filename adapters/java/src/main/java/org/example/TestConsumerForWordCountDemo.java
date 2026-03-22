@@ -19,7 +19,7 @@ public class TestConsumerForWordCountDemo {
         Properties props = new Properties();
 
         // Адрес Kafka брокера (как в вашем Streams приложении)
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "<ip>:9092");
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "158.160.41.251:9092");
 
         // ID группы консьюмеров
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "wordcount-result-reader-group");
