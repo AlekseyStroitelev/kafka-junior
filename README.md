@@ -6,7 +6,7 @@
 
 3. Развертываение [akhq-server](ansible/README.md#akhq)
 
-4. Примеры работы адаптеров на [GO/Python](/adapters/README.md)
+4. Примеры работы адаптеров на [GO/Python/Java](/adapters/README.md)
 
 ---
 
